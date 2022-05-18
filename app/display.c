@@ -83,7 +83,7 @@ void display_init(void)
     set_foreground_colour(BLACK);
     set_background_colour(WHITE);
     clear_screen_region(0, 0, 0, 27);
-    prints(0, 0, "     Memtest86+ v6.00b1");
+    prints(0, 0, " Author: Huang Chao v0.0.1");
     set_foreground_colour(RED);
     printc(0, 14, '+');
     set_foreground_colour(WHITE);
@@ -98,23 +98,45 @@ void display_init(void)
     prints(7, 0, "CPU:                      SMP: N/A        | Time:           Status: Init. ");
     prints(8, 0, "Using:                                    | Pass:           Errors: ");
     prints(9, 0, "--------------------------------------------------------------------------------");
+    prints(11, 0, "|      | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | RESULT |");
+    prints(12, 0, "|  U1  |   |   |   |   |   |   |   |   |   |    |        |");
 
     // Redraw lines using box drawing characters.
     // Disable if TTY is enabled to avoid VT100 char replacements
+    // 图片种的非虚线线条
     if (!enable_tty) {
+        // 横线1，2
         for (int i = 0;i < 80; i++) {
-            print_char(6, i, 0xc4);
-            print_char(9, i, 0xc4);
+            print_char(6, i, 0xc4); // 第6行开始，80个0xc4
+            print_char(9, i, 0xc4); // 第9行开始，80个0xc4
         }
+        // 竖线1
         for (int i = 0; i < 6; i++) {
-            print_char(i, 28, 0xb3);
+            print_char(i, 28, 0xb3); // 第28列开始，6个0xb3
         }
-        for (int i = 7; i < 10; i++) {
-            print_char(i, 42, 0xb3);
+        // 竖线2
+        for (int i = 7; i < 9; i++) {
+            print_char(i, 42, 0xb3); // 第42列开始，2个0xb3
         }
-        print_char(6, 28, 0xc1);
-        print_char(6, 42, 0xc2);
-        print_char(9, 42, 0xc1);
+        // 竖线3，4，5，6，7，8，9，10，11，12，13，14，15
+        for (int i = 11; i < 13; i++) {
+            print_char(i, 0, 0xb3); // 第0列开始，2个0xb3
+            print_char(i, 6, 0xb3); // 第6列开始，2个0xb3
+            print_char(i, 10, 0xb3); // 第10列开始，2个0xb3
+            print_char(i, 14, 0xb3); // 第14列开始，2个0xb3
+            print_char(i, 18, 0xb3); // 第18列开始，2个0xb3
+            print_char(i, 22, 0xb3); // 第22列开始，2个0xb3
+            print_char(i, 26, 0xb3); // 第26列开始，2个0xb3
+            print_char(i, 30, 0xb3); // 第30列开始，2个0xb3
+            print_char(i, 34, 0xb3); // 第34列开始，2个0xb3
+            print_char(i, 38, 0xb3); // 第38列开始，2个0xb3
+            print_char(i, 42, 0xb3); // 第42列开始，2个0xb3
+            print_char(i, 47, 0xb3); // 第47列开始，2个0xb3
+            print_char(i, 56, 0xb3); // 第56列开始，2个0xb3
+        }
+        print_char(6, 28, 0xc1); // 横线1和竖线1的交界
+        print_char(6, 42, 0xc2); // 横线1和竖线2的交界
+        print_char(9, 42, 0xc1); // 横线2和竖线2的交界
     }
 
     set_foreground_colour(BLUE);
