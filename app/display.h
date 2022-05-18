@@ -21,7 +21,7 @@
 
 #include "test.h"
 
-#define ROW_MESSAGE_T   10
+#define ROW_MESSAGE_T   12
 #define ROW_MESSAGE_B   (SCREEN_HEIGHT - 2)
 
 #define ROW_SCROLL_T    (ROW_MESSAGE_T + 2)
@@ -180,6 +180,7 @@ typedef enum {
 #define display_error_count(count) \
     printi(8, 68, count, 0, false, true)
 
+// 清空指定区域内容
 #define clear_message_area() \
     { \
         clear_screen_region(ROW_MESSAGE_T, 0, ROW_MESSAGE_B, SCREEN_WIDTH - 1); \

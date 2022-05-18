@@ -98,8 +98,8 @@ void display_init(void)
     prints(7, 0, "CPU:                      SMP: N/A        | Time:           Status: Init. ");
     prints(8, 0, "Using:                                    | Pass:           Errors: ");
     prints(9, 0, "--------------------------------------------------------------------------------");
-    prints(11, 0, "|      | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | RESULT |");
-    prints(12, 0, "|  U1  |   |   |   |   |   |   |   |   |   |    |        |");
+    prints(10, 0, "         1   2   3   4   5   6   7   8   9   10   RESULT  ");
+    prints(11, 0, "   U1                                                     ");
 
     // Redraw lines using box drawing characters.
     // Disable if TTY is enabled to avoid VT100 char replacements
@@ -119,7 +119,7 @@ void display_init(void)
             print_char(i, 42, 0xb3); // 第42列开始，2个0xb3
         }
         // 竖线3，4，5，6，7，8，9，10，11，12，13，14，15
-        for (int i = 11; i < 13; i++) {
+        for (int i = 10; i < 12; i++) {
             print_char(i, 0, 0xb3); // 第0列开始，2个0xb3
             print_char(i, 6, 0xb3); // 第6列开始，2个0xb3
             print_char(i, 10, 0xb3); // 第10列开始，2个0xb3
