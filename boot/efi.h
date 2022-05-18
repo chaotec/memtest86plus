@@ -38,7 +38,8 @@
 /**
  * EFI_ALLOCATE_TYPE values.
  */
-#define EFI_ALLOCATE_ADDRESS    2
+#define EFI_ALLOCATE_MAX_ADDRESS    1
+#define EFI_ALLOCATE_ADDRESS        2
 
 /**
  * EFI_MEMORY_TYPE values.
@@ -284,5 +285,21 @@ typedef struct {
     uintn_t                 num_config_tables;
     efi_config_table_t     *config_tables;
 } efi_system_table_t;
+
+typedef struct {
+    uint32_t            revision;
+    efi_handle_t        parent_handle;
+    efi_system_table_t *system_table;
+    efi_handle_t        device_handle;
+    void               *file_path;
+    void               *reserved;
+    uint32_t            load_options_size;
+    void               *load_options;
+    void               *image_base;
+    uint64_t            image_size;
+    int                 image_code_type;
+    int                 image_data_type;
+    void               *unload;
+} efi_loaded_image_t;
 
 #endif /* EFI_H */

@@ -1,5 +1,5 @@
 ---
-[DISCLAIMER] Memtest86+ v6.0 is NOT READY FOR PRODUCTION yet. The base code has basically been rewritten from scratch and many side functions are still under active development. A lot of additional beta-testing is needed. Please consider the actual code as experimental and expect crashes and freezes. Bugs reports are welcome and very helpful! The first binary beta release is planned for April (along with a new [memtest.org](https://memtest.org) website) and a first production-ready stable release this summer.
+[DISCLAIMER] Memtest86+ v6.0 is NOT READY FOR PRODUCTION yet. The base code has basically been rewritten from scratch and many side functions are still under active development. A lot of additional beta-testing is needed. Please consider the actual code as experimental and expect crashes and freezes. Bugs reports are welcome and very helpful! Binary beta release are available on [memtest.org](https://memtest.org). The first production-ready stable release is planned for this summer.
 
 ---
 
@@ -120,8 +120,8 @@ option consists of an option name, optionally followed by an `=` sign and
 one or more parameters, separated by commas. The following options are
 recognised:
 
-  * smp
-    * enables the use of multiple CPU cores at startup
+  * nosmp
+    * disables ACPI table parsing and the use of multiple CPU cores
   * nosm
     * disables SMBUS/SPD parsing, DMI decoding and memory benchmark
   * nopause
@@ -131,6 +131,18 @@ recognised:
       * legacy
       * usb
       * buggy-usb
+  * console=ttyS*x*,*y*
+    * activate serial/tty console output, where *x* is one of the following IO port
+      *  0 = 0x3F8
+      *  1 = 0x2F8
+      *  2 = 0x3E8 
+      *  3 = 0x2E8
+    * and *y* is an optional single digit used to set the baud rate
+      * 0 = 9600 bps
+      * 1 = 19200 bps
+      * 2 = 38400 bps
+      * 3 = 57600 bps
+      * 4 = 115200 bps (default if no *y* value specified)
 
 ## Keyboard Selection
 
@@ -170,7 +182,7 @@ At startup, and when running tests, Memtest86+ responds to the following keys:
   * F1
     * enters the configuration menu
   * F2
-    * toggles detection and use of multiple CPU cores (SMP)
+    * toggles use of multiple CPU cores (SMP)
   * Space
     * toggles scroll lock (stops/starts error message scrolling)
   * Enter
@@ -515,8 +527,6 @@ of all zeros and all ones.
 ## Known Limitations and Bugs
 
   * Keyboard may not be detected at launch in UEFI mode
-  * Reboot may not work with some motherboard in UEFI mode
-  * SMP may not be detected on latest Ryzen motherboard
 
 Feel free to submit bug reports!
 
