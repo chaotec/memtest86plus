@@ -98,8 +98,8 @@ void display_init(void)
     prints(7, 0, "CPU:                      SMP: N/A        | Time:           Status: Init. ");
     prints(8, 0, "Using:                                    | Pass:           Errors: ");
     prints(9, 0, "--------------------------------------------------------------------------------");
-    prints(10, 0, "         1   2   3   4   5   6   7   8   9   10   RESULT  ");
-    prints(11, 0, "   U1                                                     ");
+    prints(10, 0, "         0   1   2   3   4   5   6   7   8   9   A   RESULT  ");
+    prints(11, 0, "   U1                                                        ");
 
     // Redraw lines using box drawing characters.
     // Disable if TTY is enabled to avoid VT100 char replacements
@@ -131,8 +131,9 @@ void display_init(void)
             print_char(i, 34, 0xb3); // 第34列开始，2个0xb3
             print_char(i, 38, 0xb3); // 第38列开始，2个0xb3
             print_char(i, 42, 0xb3); // 第42列开始，2个0xb3
-            print_char(i, 47, 0xb3); // 第47列开始，2个0xb3
-            print_char(i, 56, 0xb3); // 第56列开始，2个0xb3
+            print_char(i, 46, 0xb3); // 第42列开始，2个0xb3
+            print_char(i, 50, 0xb3); // 第47列开始，2个0xb3
+            print_char(i, 59, 0xb3); // 第56列开始，2个0xb3
         }
         print_char(6, 28, 0xc1); // 横线1和竖线1的交界
         print_char(6, 42, 0xc2); // 横线1和竖线2的交界
@@ -298,6 +299,8 @@ void display_start_run(void)
 void display_start_pass(void)
 {
     clear_screen_region(1, 39, 1, SCREEN_WIDTH - 1);    // progress bar
+    // 删除芯片测试的内容
+    clear_unit_result_region();
     display_pass_percentage(0);
     pass_bar_length = 0;
     pass_ticks = 0;
@@ -314,6 +317,20 @@ void display_start_test(void)
     display_test_description(test_list[test_num].description);
     test_bar_length = 0;
     test_ticks = 0;
+}
+
+// 显示某个测试项是否通过
+void display_unit_test(int unit_num, bool pass)
+{
+    // 此处要根据页面实际位置调整
+    int x, y;
+    x = unit_num + 10;
+    y = test_num - 1;
+    if (pass == true) {
+        display_unit_test_number(x, y, 'O');
+    } else {
+        display_unit_test_number(x, y, 'X');
+    }
 }
 
 void check_input(void)

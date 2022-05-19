@@ -21,7 +21,7 @@
 
 #include "test.h"
 
-#define ROW_MESSAGE_T   12
+#define ROW_MESSAGE_T   13
 #define ROW_MESSAGE_B   (SCREEN_HEIGHT - 2)
 
 #define ROW_SCROLL_T    (ROW_MESSAGE_T + 2)
@@ -123,6 +123,7 @@ typedef enum {
         pass_bar_length++;                      \
     }
 
+// test 达到100%才会进入下一个test
 #define display_test_percentage(pct) \
     printi(2, 34, pct, 3, false, false)
 
@@ -134,6 +135,9 @@ typedef enum {
 
 #define display_test_number(number) \
     printi(3, 36, number, 2, false, true)
+
+#define display_unit_test_number(unit_num, number, pass) \
+    printc(unit_num, number * 4 + 9, pass)
 
 #define display_test_description(str) \
     prints(3, 39, str)
@@ -176,6 +180,9 @@ typedef enum {
 
 #define display_pass_count(count) \
     printi(8, 51, count, 0, false, true)
+
+#define display_unit_pass_result(unit_num, str) \
+    prints(unit_num, 54, str)
 
 #define display_error_count(count) \
     printi(8, 68, count, 0, false, true)
@@ -231,6 +238,8 @@ void display_start_run(void);
 void display_start_pass(void);
 
 void display_start_test(void);
+
+void display_unit_test(int unit_num, bool pass);
 
 void check_input(void);
 

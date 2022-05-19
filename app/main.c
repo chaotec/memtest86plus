@@ -617,6 +617,9 @@ void main(void)
 
         start_test = true;
         test_num++;
+        if (!dummy_run) {
+            display_unit_test(1, true);
+        }
         if (test_num < NUM_TEST_PATTERNS) {
             continue;
         }
@@ -632,8 +635,12 @@ void main(void)
         if (!dummy_run) {
             display_pass_count(pass_num);
             if (error_count == 0) {
+                // TODO: 增加芯片报错判断逻辑
+                display_unit_pass_result(11, "PASS");
                 display_status("Pass   ");
                 display_notice("** Pass completed, no errors **");
+            } else {
+                display_unit_pass_result(11, "FAIL");
             }
         }
     }

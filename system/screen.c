@@ -279,6 +279,27 @@ void clear_screen_region(int start_row, int start_col, int end_row, int end_col)
     }
 }
 
+void clear_unit_result_region(void)
+{
+    // 需要根据需求调整
+    int end_row = 11;
+    int start_col = 9;
+    // 所有列
+    int test_cols = 11;
+    for (int row = 11; row <= end_row; row++) {
+        for (int num = 0; num <= test_cols; num++) {
+            // if (num == 12) {
+            //     // 清空PASS或者FAIL
+            //     for (int i = 0; i < 4; i++) {
+            //         put_char(row, start_col + num * 4 + i + 1, ' ', current_attr);
+            //     }
+            //     continue;
+            // }
+            put_char(row, start_col + num * 4, ' ', current_attr);
+        }
+    }
+}
+
 void scroll_screen_region(int start_row, int start_col, int end_row, int end_col)
 {
     if (start_row < 0) start_row = 0;
